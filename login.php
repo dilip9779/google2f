@@ -5,8 +5,7 @@ if ($csrf == $_SESSION["token"]) {
 	$username	= $connect->real_escape_string($_POST['username']);
 	$password	= $connect->real_escape_string(md5($_POST['password']));	
 	/* Check Username and Password */
-	$query		= db_query("select * from google_auth where (email='".$username."' or username='".$username."') and password='".$password."' ");	
-
+	$query		= db_query("select * from google_auth where (email='$username' or username='$username') and password='$password' ");
 	$resuser = mysqli_num_rows($query);
 	if($resuser > 0){
 		$row = mysqli_fetch_array($query);
@@ -14,8 +13,7 @@ if ($csrf == $_SESSION["token"]) {
 		$_SESSION['secret'] = $row['googlecode'];		
 		header('Location:device_confirmations.php');
 		exit();
-	}else{
-		$msg="Invalid Username or Password";												
+	}else{										
 		header('Location:login.php?error=1');
 		exit();
 	}	
@@ -37,8 +35,7 @@ if($msg == 1){ $strmsg = "Invalid Username or Password"; }
         <link rel="stylesheet" href="assets/css/form-design.css">
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">  
 </head>
-    <body class="a2z-wrapper">
-        
+    <body class="a2z-wrapper">        
         <!--Start a2z-area-->
         <section class="a2z-area">
             <div class="container">
@@ -54,8 +51,7 @@ if($msg == 1){ $strmsg = "Invalid Username or Password"; }
 									  </a></li>
 									 <li> <a class="btn btn-block btn-social" href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8" target="_blank">
 										<img src="assets/img/iphone.png">
-									  </a></li>
-									 
+									  </a></li>									 
                                 </ul>
                             </div>
                             <div class="form-input">

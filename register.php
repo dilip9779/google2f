@@ -8,8 +8,6 @@ require_once 'googleLib/GoogleAuthenticator.php';
 $ga = new GoogleAuthenticator();
 $secret = $ga->createSecret();
 
-
-
 if ($csrf == $_SESSION["token"]) {
 	$googlecode = $connect->real_escape_string($_POST['googlecode']);
 	$fname 		= $connect->real_escape_string($_POST['fname']);
@@ -20,22 +18,15 @@ if ($csrf == $_SESSION["token"]) {
 	$status 	= 1;
 	
 	/* Check IF Username or email used Before */
-	$query		= db_query("select * from  google_auth where email='".$email."' or username='".$username."'");	
+	$query		= db_query("select * from  google_auth where email='$email' or username='$username'");	
 	$resuser = mysqli_num_rows($query);
 	if($resuser > 0){
 		header('Location:register.php?error=2');
 		exit();
 	}else{
-		$mysql = db_query("insert into google_auth set	fname	= '".$fname."', 
-														lname	= '".$lname."',
-														email	= '".$email."',
-														username	= '".$username."',
-														password	= '".$password."',
-														googlecode	= '".$googlecode."'");
-
+		$mysql = db_query("insert into google_auth set fname= '$fname',lname='$lname',email='$email',username='$username',password='$password',googlecode='$googlecode'");
 		$_SESSION['email'] 	= $email;
-		$_SESSION['secret'] = $googlecode;
-		
+		$_SESSION['secret'] = $googlecode;		
 		header('Location:device_confirmations.php');
 		exit();
 	}	
@@ -55,7 +46,6 @@ if ($csrf == $_SESSION["token"]) {
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">  	
 </head>
     <body class="a2z-wrapper">
-
         <!--Start a2z-area-->
         <section class="a2z-area">
             <div class="container">

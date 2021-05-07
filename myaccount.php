@@ -4,17 +4,13 @@ if (!isset($_SESSION['googleCode'])):
     header("location:register.php");
 	exit();
 endif;
-
 $googlecode = $_SESSION['secret'];
-$sql = db_query("select * from google_auth where googlecode = '".$googlecode."'");
+$sql = db_query("select * from google_auth where googlecode = '$googlecode'");
 $row = mysqli_fetch_array($sql);
-
 $firstname 	= $row['fname'];
 $lastname 	= $row['lname'];
 $email 		= $row['email'];
-
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,7 +25,6 @@ $email 		= $row['email'];
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">  
 </head>
     <body class="a2z-wrapper">
-
         <!--Start a2z-area-->
         <section class="a2z-area">
             <div class="container">
@@ -46,25 +41,20 @@ $email 		= $row['email'];
 										<div class="form-group">
 											<label>First name: </label> <span style="color:#2d87d7"><?php print $firstname; ?></span>
 										</div>
-                                    </div>
-									
+                                    </div>									
 									<div class="row">
 										<div class="form-group">
 											<label>last name: </label> <span style="color:#2d87d7"><?php print $lastname; ?></span>
 										</div>
-                                    </div>
-									
+                                    </div>									
 									<div class="row">
 										<div class="form-group">
 											<label>Email Address: </label> <span style="color:#2d87d7"><?php print $email; ?></span>
 										</div>
-									</div>
-									
+									</div>									
 									<div class="a2z-button">
                                         <a href="logout.php" class="a2z-btn" style="padding: 10px 30px;">Logout</a>
-                                    </div>
-									
-									
+                                    </div>								
                             </div>
                         </div>
                     </div>
